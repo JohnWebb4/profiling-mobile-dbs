@@ -6,33 +6,31 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, FlatList} from 'react-native';
-import {ContactItem} from './contactItem';
-import {Contact} from './contact';
+import React, {useEffect, useState} from 'react';
+import {StatusBar, FlatList} from 'react-native';
 
-const data: Contact[] = [
-  {
-    id: '1',
-    name: 'John',
-  },
-  {
-    id: '2',
-    name: 'Joe',
-  },
-  {
-    id: '3',
-    name: 'Stuff',
-  },
-];
+import {ContactItem} from './contactItem';
+import {Contact} from './types/contact';
+import {inMemoryContactService} from './contactServices/inMemoryContactService';
 
 function App(): React$Node {
+  const [contacts, updateContacts] = useState([]);
+  const contactService = inMemoryContactService;
+
+  useEffect(() => {
+    contactService.writeXSampleContacts(1000000);
+    updateContacts(contactService.getContacts());
+
+    return () => {
+      contactService.deleteAllContacts();
+    };
+  }, []);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <FlatList
-        style={{backgroundColor: 'green'}}
-        data={data}
+        data={contacts}
         keyExtractor={getContactKey}
         renderItem={ContactItem}
       />

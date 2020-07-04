@@ -2,7 +2,7 @@
 import React from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
-import {Contact} from './contact';
+import {Contact} from './types/contact';
 
 function ContactItem({item, separators}: {item: Contact}): React$Node {
   const {id, name} = item;
