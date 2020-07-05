@@ -2,7 +2,7 @@
 import React from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
-import {Contact} from './types/contact';
+import {Contact} from '../types/contact';
 
 function ContactItem({item, separators}: {item: Contact}): React$Node {
   const {id, name} = item;
@@ -18,16 +18,21 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.highlight}>
       <View>
-        <Text style={styles.header}>{name}</Text>
+        <Text style={styles.header}>
+          <Text style={styles.id}>{`${id}. `}</Text>
+          <Text>{name}</Text>
+        </Text>
       </View>
     </TouchableHighlight>
   );
 }
 
 const styles = StyleSheet.create({
+  id: {
+    color: 'blue',
+  },
   header: {
     fontSize: 50,
-    marginHorizontal: 20,
   },
 });
 

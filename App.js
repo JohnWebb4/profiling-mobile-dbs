@@ -7,39 +7,54 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {StatusBar, FlatList} from 'react-native';
+import {StatusBar, InteractionManager} from 'react-native';
 
-import {ContactItem} from './contactItem';
-import {Contact} from './types/contact';
-import {inMemoryContactService} from './contactServices/inMemoryContactService';
+import {inMemoryContactService} from './src/contactServices/inMemoryContactService';
+// import {realmContactService} from './src/contactServices/realmContactService';
+import {ContactScreen} from './src/screens/contactScreen';
+import {MetricsBar} from './src/components/metricsBar';
+
+const BATCH_SIZE = 1000; // contacts per batch
+const BATCH_INTERVAL = 100; // ms
+const SAMPLE_CONTACT_COUNT = 100000; // total number of sample contacts
 
 function App(): React$Node {
-  const [contacts, updateContacts] = useState([]);
   const contactService = inMemoryContactService;
 
+  const [completeTime, updateCompleteTime] = useState(undefined);
+  const [startTime, updateStartTime] = useState(undefined);
+
   useEffect(() => {
-    contactService.writeXSampleContacts(1000000);
-    updateContacts(contactService.getContacts());
+    InteractionManager.runAfterInteractions(() => {
+      contactService.deleteAllContacts();
+
+      updateStartTime(Date.now());
+
+      contactService.writeXSampleContacts(
+        SAMPLE_CONTACT_COUNT,
+        BATCH_SIZE,
+        BATCH_INTERVAL,
+        0,
+        () => {
+          updateCompleteTime(Date.now);
+        },
+      );
+    });
 
     return () => {
-      contactService.deleteAllContacts();
+      contactService.close();
     };
   }, []);
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <FlatList
-        data={contacts}
-        keyExtractor={getContactKey}
-        renderItem={ContactItem}
-      />
+
+      <ContactScreen contactService={contactService} />
+
+      <MetricsBar diffTime={completeTime - startTime} />
     </>
   );
-}
-
-function getContactKey({id}: Contact) {
-  return id;
 }
 
 export default App;
