@@ -13,18 +13,18 @@ import {ContactScreen} from './src/screens/contactScreen';
 import {MetricsBar} from './src/components/metricsBar';
 
 // Swap for contactService as you see fit
-// import {inMemoryContactService} from './src/contactServices/inMemoryContactService';
+import {inMemoryContactService} from './src/contactServices/inMemoryContactService';
 // import {realmContactService} from './src/contactServices/realmContactService';
-import {watermelonContactService} from './src/contactServices/watermelonContactService';
+// import {watermelonContactService} from './src/contactServices/watermelonContactService';
 
 const BATCH_SIZE = 1000; // contacts per batch
 const BATCH_INTERVAL = 100; // ms
 const SAMPLE_CONTACT_COUNT = 100000; // total number of sample contacts
 
 function App(): React$Node {
-  // const contactService = inMemoryContactService;
+  const contactService = inMemoryContactService;
   // const contactService = realmContactService;
-  const contactService = watermelonContactService;
+  // const contactService = watermelonContactService;
 
   const [completeTime, updateCompleteTime] = useState(undefined);
   const [startTime, updateStartTime] = useState(undefined);

@@ -62,7 +62,7 @@ const enhance = withObservables(['contacts'], ({contacts, searchText}) => {
   };
 });
 
-const ContactList = enhance(RawContactList);
-// const ContactList = RawContactList;
+// const ContactList = enhance(RawContactList);
+const ContactList = RawContactList;
 
 export {ContactList};
