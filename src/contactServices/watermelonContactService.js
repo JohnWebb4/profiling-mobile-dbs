@@ -47,6 +47,10 @@ class WatermelonContactService implements ContactService {
     cb: () => {},
   ): Promise<void> {
     let index = startIndex;
+    // console.log(
+    //   'Write sample contacts. Current count: ',
+    //   await this.contactsCollection.query().fetchCount(),
+    // );
 
     const batchActions = [];
 

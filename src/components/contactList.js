@@ -55,8 +55,6 @@ const enhance = withObservables(['contacts'], ({contacts, searchText}) => {
     }
   }
 
-  console.log('returning contacts', contacts);
-
   return {
     contacts,
   };

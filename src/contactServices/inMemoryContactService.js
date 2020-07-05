@@ -25,7 +25,7 @@ class InMemoryContactService implements ContactService {
     startIndex: number = 0,
     cb: () => {},
   ) {
-    console.log('write sample contacts. Current count: ', data.length);
+    // console.log('Write sample contacts. Current count: ', data.length);
 
     let index = startIndex;
 

@@ -39,11 +39,10 @@ class RealmContactService implements ContactService {
     startIndex: number = 0,
     cb: () => {},
   ): void {
-    console.log(
-      'write sample contacts. Current count: ',
-      this.realm.objects(CONTACT_MODEL).length,
-      cb,
-    );
+    // console.log(
+    //   'Write sample contacts. Current count: ',
+    //   this.realm.objects(CONTACT_MODEL).length,
+    // );
 
     let index = startIndex;
 
