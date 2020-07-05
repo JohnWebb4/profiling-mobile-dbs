@@ -1,24 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {InteractionManager, FlatList, StyleSheet, Text} from 'react-native';
+import {InteractionManager, StyleSheet} from 'react-native';
 
-import {ContactItem} from '../components/contactItem';
 import {SearchBar} from '../components/searchBar';
-import {Contact} from '../types/contact';
-import {formatNumber} from '../utils/format';
+
+import {ContactList} from '../components/contactList';
 
 function ContactScreen({contactService}) {
   const [contacts, updateContacts] = useState([]);
   const [searchText, updateSearchText] = useState('');
-  const [updateInterval, updateUpdateInterval] = useState();
 
   useEffect(() => {
-    InteractionManager.runAfterInteractions(() => {
-      updateContacts(contactService.getContacts());
+    InteractionManager.runAfterInteractions(async () => {
+      updateContacts(await contactService.getContacts());
     });
-
-    return () => {
-      clearInterval(updateInterval);
-    };
   }, []);
 
   let searchContacts = contacts;
@@ -28,7 +22,7 @@ function ContactScreen({contactService}) {
       searchContacts = contacts.filtered('name CONTAINS[c] $0', searchText);
     } else {
       searchContacts = contacts.filter(({name}) =>
-        name.contains(searchContacts),
+        name.includes(searchContacts),
       );
     }
   }
@@ -42,23 +36,9 @@ function ContactScreen({contactService}) {
         {searchText}
       </SearchBar>
 
-      <Text
-        style={[styles.container, styles.padding]}>{`Matches: ${formatNumber(
-        searchContacts.length,
-      )}`}</Text>
-
-      <FlatList
-        style={styles.container}
-        data={searchContacts}
-        keyExtractor={getContactKey}
-        renderItem={ContactItem}
-      />
+      <ContactList contacts={contacts} searchText={searchText} />
     </>
   );
-}
-
-function getContactKey({id}: Contact) {
-  return id;
 }
 
 const styles = StyleSheet.create({

@@ -10,7 +10,7 @@ let data: Contact[] = [];
 class InMemoryContactService implements ContactService {
   close() {}
 
-  deleteAllContacts() {
+  async deleteAllContacts() {
     data = [];
   }
 
@@ -18,20 +18,20 @@ class InMemoryContactService implements ContactService {
     return data;
   }
 
-  writeXSampleContacts(
+  async writeXSampleContacts(
     count: number,
     batchSize: number,
     batchInterval: number,
     startIndex: number = 0,
     cb: () => {},
   ) {
-    console.log('asdf - write sample contacts. Current count: ', data.length);
+    console.log('write sample contacts. Current count: ', data.length);
 
     let index = startIndex;
 
     for (let i = 0; i < batchSize && index < count; i++) {
       data.push({
-        id: String(index),
+        key: String(index),
         name: getName(index),
       });
 

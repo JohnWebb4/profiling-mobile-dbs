@@ -203,13 +203,13 @@ const sampleName = [
   'Jane',
 ];
 
-function getName(id: number) {
-  // ID is zero based, so log(0) is -inf
+function getName(key: number) {
+  // key is zero based, so log(0) is -inf
   // Add one to start at one
-  let currentIndex = id;
+  let currentIndex = key;
   let nameParts = [];
 
-  if (id === 0) {
+  if (key === 0) {
     return sampleName[0];
   }
 

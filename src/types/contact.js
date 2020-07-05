@@ -1,6 +1,6 @@
 // @flow
 
 export interface Contact {
-  id: string;
+  key: string;
   name: string;
 }

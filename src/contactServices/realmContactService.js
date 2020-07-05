@@ -14,7 +14,7 @@ class RealmContactService implements ContactService {
     }).then((realm) => {
       this.realm = realm;
 
-      console.log(`asdf - realm path: ${this.realm.path}`);
+      console.log(`realm path: ${this.realm.path}`);
     });
   }
 
@@ -22,7 +22,7 @@ class RealmContactService implements ContactService {
     this.realm.close();
   }
 
-  deleteAllContacts() {
+  async deleteAllContacts() {
     this.realm.write(() => {
       this.realm.delete(this.realm.objects(CONTACT_MODEL));
     });
@@ -32,7 +32,7 @@ class RealmContactService implements ContactService {
     return this.realm.objects(CONTACT_MODEL);
   }
 
-  writeXSampleContacts(
+  async writeXSampleContacts(
     count: number,
     batchSize: number,
     batchInterval: number,
@@ -40,7 +40,7 @@ class RealmContactService implements ContactService {
     cb: () => {},
   ): void {
     console.log(
-      'asdf - write sample contacts. Current count: ',
+      'write sample contacts. Current count: ',
       this.realm.objects(CONTACT_MODEL).length,
       cb,
     );
@@ -50,7 +50,7 @@ class RealmContactService implements ContactService {
     this.realm.write(() => {
       for (let i = 0; i < batchSize && index < count; i++) {
         this.realm.create(CONTACT_MODEL, {
-          id: String(index),
+          key: String(index),
           name: getName(index),
         });
 

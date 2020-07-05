@@ -5,7 +5,7 @@ import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {Contact} from '../types/contact';
 
 function ContactItem({item, separators}: {item: Contact}): React$Node {
-  const {id, name} = item;
+  const {key, name} = item;
 
   function onPress() {
     Alert.alert(name);
@@ -13,13 +13,13 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
 
   return (
     <TouchableHighlight
-      key={id}
+      key={key}
       onPress={onPress}
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.highlight}>
       <View>
         <Text style={styles.header}>
-          <Text style={styles.id}>{`${id}. `}</Text>
+          <Text style={styles.key}>{`${key}. `}</Text>
           <Text>{name}</Text>
         </Text>
       </View>
@@ -28,7 +28,7 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
 }
 
 const styles = StyleSheet.create({
-  id: {
+  key: {
     color: 'blue',
   },
   header: {

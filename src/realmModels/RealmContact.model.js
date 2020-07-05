@@ -3,7 +3,7 @@ const CONTACT_MODEL = 'Contact';
 const RealmContact = {
   name: CONTACT_MODEL,
   properties: {
-    id: 'string',
+    key: 'string',
     name: 'string',
   },
 };

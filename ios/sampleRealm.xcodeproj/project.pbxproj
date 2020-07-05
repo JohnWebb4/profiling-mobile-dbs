@@ -18,8 +18,10 @@
 		2DCD954D1E0B4F2C00145EB5 /* sampleRealmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* sampleRealmTests.m */; };
 		34E1CB0F0A5820C11014CB69 /* libPods-sampleRealm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 617A6CDD714550884C35DD44 /* libPods-sampleRealm.a */; };
 		3750BDDE8DCBC2BAA41D61DE /* libPods-sampleRealm-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7C144B78BCCF3AAD7FCCD /* libPods-sampleRealm-tvOSTests.a */; };
+		873191DD24B1A9DC004824A9 /* bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873191DC24B1A9DC004824A9 /* bridge.swift */; };
 		A10048614C6AA948D13CB86B /* libPods-sampleRealm-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26E9EADD2C64A86EB6AA945 /* libPods-sampleRealm-tvOS.a */; };
 		A788FB03AFADB2894FD2D532 /* libPods-sampleRealm-sampleRealmTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8380EA60297974684253F8 /* libPods-sampleRealm-sampleRealmTests.a */; };
+		D04D0CECEEF74EEDBEACC171 /* libWatermelonDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FFA9B857D2494FA165A82A /* libWatermelonDB.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "sampleRealm-tvOS";
+		};
+		873191E224B1A9EC004824A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B6B3D1B70244E53B5FDB07E /* WatermelonDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E660D5E213BCCD300189354;
+			remoteInfo = WatermelonDB;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -55,12 +64,16 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sampleRealm/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* sampleRealm-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sampleRealm-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* sampleRealm-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sampleRealm-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FFA9B857D2494FA165A82A /* libWatermelonDB.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libWatermelonDB.a; sourceTree = "<group>"; };
 		36D7B1BD9F7C8957235F884B /* Pods-sampleRealm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sampleRealm.debug.xcconfig"; path = "Target Support Files/Pods-sampleRealm/Pods-sampleRealm.debug.xcconfig"; sourceTree = "<group>"; };
 		4350F9E410A697359D70DC5E /* Pods-sampleRealm-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sampleRealm-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-sampleRealm-tvOSTests/Pods-sampleRealm-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4B6B3D1B70244E53B5FDB07E /* WatermelonDB.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = WatermelonDB.xcodeproj; path = "../node_modules/@nozbe/watermelondb/native/ios/WatermelonDB.xcodeproj"; sourceTree = "<group>"; };
 		617A6CDD714550884C35DD44 /* libPods-sampleRealm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sampleRealm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64AC34BDA4CD01F4BFF1C883 /* Pods-sampleRealm-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sampleRealm-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-sampleRealm-tvOSTests/Pods-sampleRealm-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7606EC1B0168730433321FD6 /* Pods-sampleRealm-sampleRealmTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sampleRealm-sampleRealmTests.release.xcconfig"; path = "Target Support Files/Pods-sampleRealm-sampleRealmTests/Pods-sampleRealm-sampleRealmTests.release.xcconfig"; sourceTree = "<group>"; };
 		7CB7C144B78BCCF3AAD7FCCD /* libPods-sampleRealm-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sampleRealm-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		873191DB24B1A9DC004824A9 /* sampleRealm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sampleRealm-Bridging-Header.h"; sourceTree = "<group>"; };
+		873191DC24B1A9DC004824A9 /* bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bridge.swift; sourceTree = "<group>"; };
 		A26E9EADD2C64A86EB6AA945 /* libPods-sampleRealm-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sampleRealm-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8380EA60297974684253F8 /* libPods-sampleRealm-sampleRealmTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sampleRealm-sampleRealmTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE8A8F30E640458A053F52FB /* Pods-sampleRealm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sampleRealm.release.xcconfig"; path = "Target Support Files/Pods-sampleRealm/Pods-sampleRealm.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E1CB0F0A5820C11014CB69 /* libPods-sampleRealm.a in Frameworks */,
+				D04D0CECEEF74EEDBEACC171 /* libWatermelonDB.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,13 +175,13 @@
 				4350F9E410A697359D70DC5E /* Pods-sampleRealm-tvOSTests.debug.xcconfig */,
 				64AC34BDA4CD01F4BFF1C883 /* Pods-sampleRealm-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4B6B3D1B70244E53B5FDB07E /* WatermelonDB.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -175,12 +189,15 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				873191DC24B1A9DC004824A9 /* bridge.swift */,
 				13B07FAE1A68108700A75B9A /* sampleRealm */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* sampleRealmTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				76770BD5427D38E8E34E2236 /* Pods */,
+				873191DB24B1A9DC004824A9 /* sampleRealm-Bridging-Header.h */,
+				873191DE24B1A9EC004824A9 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -194,6 +211,22 @@
 				00E356EE1AD99517003FC87E /* sampleRealmTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* sampleRealm-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* sampleRealm-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		873191DE24B1A9EC004824A9 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				30FFA9B857D2494FA165A82A /* libWatermelonDB.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		873191DF24B1A9EC004824A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				873191E324B1A9EC004824A9 /* libWatermelonDB.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,7 +325,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1150;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -316,6 +349,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 873191DF24B1A9EC004824A9 /* Products */;
+					ProjectRef = 4B6B3D1B70244E53B5FDB07E /* WatermelonDB.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* sampleRealm */,
@@ -325,6 +364,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		873191E324B1A9EC004824A9 /* libWatermelonDB.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libWatermelonDB.a;
+			remoteRef = 873191E224B1A9EC004824A9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -530,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873191DD24B1A9DC004824A9 /* bridge.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -584,14 +634,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF817ADB92C56B7B2C78EAA5 /* Pods-sampleRealm-sampleRealmTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = sampleRealmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -607,11 +666,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7606EC1B0168730433321FD6 /* Pods-sampleRealm-sampleRealmTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = sampleRealmTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -635,6 +703,10 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = sampleRealm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -644,6 +716,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = sampleRealm;
+				SWIFT_OBJC_BRIDGING_HEADER = "sampleRealm-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -657,6 +730,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = sampleRealm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -666,6 +743,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = sampleRealm;
+				SWIFT_OBJC_BRIDGING_HEADER = "sampleRealm-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -684,8 +762,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = "sampleRealm-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -712,8 +798,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = "sampleRealm-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -739,8 +833,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = "sampleRealm-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -766,8 +868,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/shared/**",
+				);
 				INFOPLIST_FILE = "sampleRealm-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

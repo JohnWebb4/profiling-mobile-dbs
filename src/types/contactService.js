@@ -6,7 +6,7 @@ import {Contact} from './contact';
 export interface ContactService {
   close(): void;
 
-  deleteAllContacts(): void;
+  deleteAllContacts(): Promise<void>;
 
   getContacts(): Contact[];
 
@@ -16,5 +16,5 @@ export interface ContactService {
     batchInterval: Number,
     startIndex: number,
     cb: () => void,
-  ): void;
+  ): Promise<void>;
 }
