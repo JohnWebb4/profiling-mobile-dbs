@@ -3,11 +3,11 @@ import {FlatList, StyleSheet, Text} from 'react-native';
 import {Q} from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 
+import {ContactItem} from '../components/contactItem';
 import {Contact} from '../types/contact';
 import {formatNumber} from '../utils/format';
-import {ContactItem} from '../components/contactItem';
 
-function RawContactList({contacts}) {
+function ContactList({contacts}) {
   return (
     <>
       {contacts.length ? (
@@ -60,7 +60,6 @@ const enhance = withObservables(['contacts'], ({contacts, searchText}) => {
   };
 });
 
-// const ContactList = enhance(RawContactList);
-const ContactList = RawContactList;
+const EnhancedContactList = enhance(ContactList);
 
-export {ContactList};
+export {ContactList, EnhancedContactList};

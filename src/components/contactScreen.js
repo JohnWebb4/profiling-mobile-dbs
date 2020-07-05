@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {InteractionManager, StyleSheet} from 'react-native';
 
-import {SearchBar} from '../components/searchBar';
+import {SearchBar} from './searchBar';
 
-import {ContactList} from '../components/contactList';
-
-function ContactScreen({contactService}) {
+function ContactScreen({contactService, ContactList}) {
   const [contacts, updateContacts] = useState([]);
   const [searchText, updateSearchText] = useState('');
 
