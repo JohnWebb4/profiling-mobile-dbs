@@ -23,25 +23,17 @@ iOS: `yarn ios`
 
 Android: `yarn android`
 
-## Profiling In Memory Cache
+## In Memory Cache
 
-All the data is put in a giant JavaScript array. Not efficient.
-
-In App.ts, uncomment the contactService variable so inMemoryContactService is used.
+All the data is put in a giant JavaScript array. Using as a psuedo base line. Not efficient. Comment out write in App.ts for large contact counts (>100,000).
 
 ## Realm
 
 Uses [Realm](https://www.npmjs.com/package/realm).
 
-In App.ts, uncomment the contactService variable so realmContactService is used.
-
 ## Watermelon DB
 
 Uses [Watermelon DB](https://www.npmjs.com/package/@nozbe/watermelondb)
-
-In App.ts, uncomment the contactService variable so watermelonContactService is used.
-
-In contactList.js, uncomment the line that enhances the ContactList at the bottom of the file.
 
 ## License
 
