@@ -44,6 +44,14 @@ def flipper_post_install(installer)
   end
 end
 
+def pod_version_post_install(installer)
+  installer.pods_project.targets.each do |t|
+    t.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+    end
+  end
+end
+
 target 'sampleRealm' do
   # Pods for sampleRealm
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
@@ -91,6 +99,7 @@ target 'sampleRealm' do
   add_flipper_pods!
   post_install do |installer|
     flipper_post_install(installer)
+    pod_version_post_install(installer)
   end
 end
 
@@ -102,3 +111,5 @@ target 'sampleRealm-tvOS' do
     # Pods for testing
   end
 end
+
+

@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
-import {Text, Dimensions} from 'react-native';
+import {Dimensions, StatusBar} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 
 import {MetricsContext} from '../contexts/metricsContext';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const CHART_HEIGHT = Dimensions.get('screen').height * 0.85;
 const CHART_WIDTH = Dimensions.get('screen').width;
@@ -27,7 +28,9 @@ function MetricsScreen() {
   const {labels, metrics} = useContext(MetricsContext);
 
   return (
-    <>
+    <SafeAreaView>
+      <StatusBar barStyle="dark-content" />
+
       {metrics[0] ? (
         <LineChart
           bezier
@@ -45,7 +48,7 @@ function MetricsScreen() {
           width={CHART_WIDTH}
         />
       ) : null}
-    </>
+    </SafeAreaView>
   );
 }
 

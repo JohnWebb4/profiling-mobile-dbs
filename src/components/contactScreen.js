@@ -30,7 +30,7 @@ function ContactScreen({contactService, ContactList}) {
       <SearchBar
         onChangeText={setSearchText}
         placeholder={'Search Contact name'}
-        style={styles.container}>
+        style={[styles.container, styles.searchBar]}>
         {searchText}
       </SearchBar>
 
@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
   },
   padding: {
     marginBottom: 10,
+  },
+  searchBar: {
+    marginTop: 10,
   },
 });
 

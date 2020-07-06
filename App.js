@@ -27,7 +27,7 @@ import {
 
 const BATCH_SIZE = 1000; // contacts per batch
 const BATCH_INTERVAL = 100; // ms
-const SAMPLE_CONTACT_COUNT = 4000; // total number of sample contacts
+const SAMPLE_CONTACT_COUNT = 20000; // total number of sample contacts
 
 const labels = [];
 
@@ -52,6 +52,7 @@ function App(): React$Node {
   performanceService.initDataSets(metrics, setMetrics);
 
   useEffect(() => {
+    // Write contacts here
     InteractionManager.runAfterInteractions(() => {
       writeSampleWatermelonContacts(
         setWatermelonStartTime,
@@ -61,6 +62,7 @@ function App(): React$Node {
             setRealmStartTime,
             setRealmCompleteTime,
             () => {
+              // Comment out for high contact counts
               writeSampleMemoryContacts(
                 setMemoryStartTime,
                 setMemoryCompleteTime,

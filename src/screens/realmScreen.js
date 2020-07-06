@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {MetricsContext} from '../contexts/metricsContext';
 import {ContactList} from '../components/contactList';
@@ -11,7 +12,7 @@ function RealmScreen() {
   const {realmStartTime, realmCompleteTime} = useContext(MetricsContext);
 
   return (
-    <>
+    <SafeAreaView>
       <StatusBar barStyle="dark-content" />
 
       {realmStartTime ? (
@@ -22,7 +23,7 @@ function RealmScreen() {
       ) : null}
 
       <MetricsBar diffTime={realmCompleteTime - realmStartTime} />
-    </>
+    </SafeAreaView>
   );
 }
 

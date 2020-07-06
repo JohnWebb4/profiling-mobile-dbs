@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {MetricsContext} from '../contexts/metricsContext';
 import {ContactScreen} from '../components/contactScreen';
@@ -13,17 +14,18 @@ function WatermelonScreen() {
   );
 
   return (
-    <>
+    <SafeAreaView>
       <StatusBar barStyle="dark-content" />
 
       {watermelonStartTime ? (
         <ContactScreen
           contactService={watermelonContactService}
-          ContactList={EnhancedContactList}></ContactScreen>
+          ContactList={EnhancedContactList}
+        />
       ) : null}
 
       <MetricsBar diffTime={watermelonCompleteTime - watermelonStartTime} />
-    </>
+    </SafeAreaView>
   );
 }
 
