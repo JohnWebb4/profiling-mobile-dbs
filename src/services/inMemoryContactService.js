@@ -1,6 +1,10 @@
 // @flow
 import {InteractionManager} from 'react-native';
 
+import {
+  performanceService,
+  PERFOMANCE_EVENTS,
+} from '../services/performanceService';
 import {Contact} from '../types/contact';
 import {ContactService} from '../types/contactService';
 import {getName} from '../utils/nameGenerator';
@@ -25,8 +29,6 @@ class InMemoryContactService implements ContactService {
     startIndex: number = 0,
     cb: () => {},
   ) {
-    // console.log('Write sample contacts. Current count: ', data.length);
-
     let index = startIndex;
 
     for (let i = 0; i < batchSize && index < count; i++) {
@@ -37,6 +39,8 @@ class InMemoryContactService implements ContactService {
 
       index++;
     }
+
+    performanceService.trackEvent(PERFOMANCE_EVENTS.inMemoryWrite);
 
     if (index < count) {
       setTimeout(() => {

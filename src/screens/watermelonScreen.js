@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import {StatusBar} from 'react-native';
 
-import {MetricsContext} from '../../App';
+import {MetricsContext} from '../contexts/metricsContext';
 import {ContactScreen} from '../components/contactScreen';
 import {EnhancedContactList} from '../components/contactList';
 import {MetricsBar} from '../components/metricsBar';
-import {watermelonContactService} from '../contactServices/watermelonContactService';
+import {watermelonContactService} from '../services/watermelonContactService';
 
 function WatermelonScreen() {
   const {watermelonStartTime, watermelonCompleteTime} = useContext(

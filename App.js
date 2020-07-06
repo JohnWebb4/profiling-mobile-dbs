@@ -12,45 +12,58 @@ import {InteractionManager} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-// Swap for contactService as you see fit
+import {MetricsContext} from './src/contexts/metricsContext';
 import {WatermelonScreen} from './src/screens/watermelonScreen';
 import {RealmScreen} from './src/screens/realmScreen';
 import {InMemoryScreen} from './src/screens/inMemoryScreen';
 import {MetricsScreen} from './src/screens/metricsScreen';
-import {watermelonContactService} from './src/contactServices/watermelonContactService';
-import {realmContactService} from './src/contactServices/realmContactService';
-import {inMemoryContactService} from './src/contactServices/inMemoryContactService';
+import {watermelonContactService} from './src/services/watermelonContactService';
+import {realmContactService} from './src/services/realmContactService';
+import {inMemoryContactService} from './src/services/inMemoryContactService';
+import {
+  performanceService,
+  PERFOMANCE_EVENTS,
+} from './src/services/performanceService';
 
 const BATCH_SIZE = 1000; // contacts per batch
 const BATCH_INTERVAL = 100; // ms
-const SAMPLE_CONTACT_COUNT = 1000; // total number of sample contacts
+const SAMPLE_CONTACT_COUNT = 4000; // total number of sample contacts
+
+const labels = [];
+
+for (let i = 0; i < SAMPLE_CONTACT_COUNT; i += BATCH_SIZE) {
+  labels.push(String(i));
+}
 
 const Tab = createBottomTabNavigator();
 
-const MetricsContext = React.createContext({});
-
 function App(): React$Node {
-  // TODO: Move to provider
-  const [watermelonStartTime, updateWatermelonStartTime] = useState();
-  const [watermelonCompleteTime, updateWatermelonCompleteTime] = useState();
-  const [realmStartTime, updateRealmStartTime] = useState();
-  const [realmCompleteTime, updateRealmCompleteTime] = useState();
-  const [memoryStartTime, updateMemoryStartTime] = useState();
-  const [memoryCompleteTime, updateMemoryCompleteTime] = useState();
+  const [memoryStartTime, setMemoryStartTime] = useState();
+  const [memoryCompleteTime, setMemoryCompleteTime] = useState();
+
+  const [realmStartTime, setRealmStartTime] = useState();
+  const [realmCompleteTime, setRealmCompleteTime] = useState();
+
+  const [watermelonStartTime, setWatermelonStartTime] = useState();
+  const [watermelonCompleteTime, setWatermelonCompleteTime] = useState();
+
+  const [metrics, setMetrics] = useState([]);
+
+  performanceService.initDataSets(metrics, setMetrics);
 
   useEffect(() => {
     InteractionManager.runAfterInteractions(() => {
       writeSampleWatermelonContacts(
-        updateWatermelonStartTime,
-        updateWatermelonCompleteTime,
+        setWatermelonStartTime,
+        setWatermelonCompleteTime,
         () => {
           writeSampleRealmContacts(
-            updateRealmStartTime,
-            updateRealmCompleteTime,
+            setRealmStartTime,
+            setRealmCompleteTime,
             () => {
               writeSampleMemoryContacts(
-                updateMemoryStartTime,
-                updateMemoryCompleteTime,
+                setMemoryStartTime,
+                setMemoryCompleteTime,
               );
             },
           );
@@ -62,12 +75,18 @@ function App(): React$Node {
   return (
     <MetricsContext.Provider
       value={{
+        labels,
+
         memoryStartTime,
         memoryCompleteTime,
+
         realmStartTime,
         realmCompleteTime,
+
         watermelonStartTime,
         watermelonCompleteTime,
+
+        metrics,
       }}>
       <NavigationContainer>
         <Tab.Navigator initialRouteName="Metrics">
@@ -100,47 +119,49 @@ function App(): React$Node {
   );
 }
 
-function writeSampleWatermelonContacts(
-  updateStartTime,
-  updateCompleteTime,
-  cb,
-) {
+function writeSampleWatermelonContacts(setStartTime, setCompleteTime, cb) {
+  performanceService.clearEvent(PERFOMANCE_EVENTS.watermelonWrite);
+
   return writeSampleContactsUsingService(
     watermelonContactService,
-    updateStartTime,
-    updateCompleteTime,
+    setStartTime,
+    setCompleteTime,
     cb,
   );
 }
 
-function writeSampleRealmContacts(updateStartTime, updateCompleteTime, cb) {
+function writeSampleRealmContacts(setStartTime, setCompleteTime, cb) {
+  performanceService.clearEvent(PERFOMANCE_EVENTS.realmWrite);
+
   return writeSampleContactsUsingService(
     realmContactService,
-    updateStartTime,
-    updateCompleteTime,
+    setStartTime,
+    setCompleteTime,
     cb,
   );
 }
 
-function writeSampleMemoryContacts(updateStartTime, updateCompleteTime, cb) {
+function writeSampleMemoryContacts(setStartTime, setCompleteTime, cb) {
+  performanceService.clearEvent(PERFOMANCE_EVENTS.inMemoryWrite);
+
   return writeSampleContactsUsingService(
     inMemoryContactService,
-    updateStartTime,
-    updateCompleteTime,
+    setStartTime,
+    setCompleteTime,
     cb,
   );
 }
 
 async function writeSampleContactsUsingService(
   contactService,
-  updateStartTime,
-  updateCompleteTime,
+  setStartTime,
+  setCompleteTime,
   cb,
 ) {
   try {
     await contactService.deleteAllContacts();
 
-    updateStartTime(Date.now());
+    setStartTime(Date.now());
 
     await contactService.writeXSampleContacts(
       SAMPLE_CONTACT_COUNT,
@@ -148,7 +169,7 @@ async function writeSampleContactsUsingService(
       BATCH_INTERVAL,
       0,
       () => {
-        updateCompleteTime(Date.now);
+        setCompleteTime(Date.now);
 
         if (cb) {
           InteractionManager.runAfterInteractions(cb);
@@ -160,4 +181,4 @@ async function writeSampleContactsUsingService(
   }
 }
 
-export {App, MetricsContext};
+export {App};

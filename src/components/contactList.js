@@ -40,25 +40,30 @@ function getContactKey({key}: Contact) {
   return key;
 }
 
-const enhance = withObservables(['contacts'], ({contacts, searchText}) => {
-  if (contacts.query) {
-    if (searchText) {
-      return {
-        contacts: contacts
-          .query(Q.where('name', Q.like(Q.sanitizeLikeString(searchText))))
-          .observe(),
-      };
-    } else {
-      return {
-        contacts: contacts.query().observe(),
-      };
+const enhance = withObservables(
+  ['contacts', 'searchText'],
+  ({contacts, searchText}) => {
+    if (contacts.query) {
+      if (searchText) {
+        return {
+          contacts: contacts
+            .query(
+              Q.where('name', Q.like(`%${Q.sanitizeLikeString(searchText)}%`)),
+            )
+            .observe(),
+        };
+      } else {
+        return {
+          contacts: contacts.query().observe(),
+        };
+      }
     }
-  }
 
-  return {
-    contacts,
-  };
-});
+    return {
+      contacts,
+    };
+  },
+);
 
 const EnhancedContactList = enhance(ContactList);
 

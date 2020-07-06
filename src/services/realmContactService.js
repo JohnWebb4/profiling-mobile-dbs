@@ -1,5 +1,9 @@
 import Realm from 'realm';
 
+import {
+  performanceService,
+  PERFOMANCE_EVENTS,
+} from '../services/performanceService';
 import {ContactService} from '../types/contactService';
 import {CONTACT_MODEL, RealmContact} from '../realmModels/RealmContact.model';
 import {getName} from '../utils/nameGenerator';
@@ -39,11 +43,6 @@ class RealmContactService implements ContactService {
     startIndex: number = 0,
     cb: () => {},
   ): void {
-    // console.log(
-    //   'Write sample contacts. Current count: ',
-    //   this.realm.objects(CONTACT_MODEL).length,
-    // );
-
     let index = startIndex;
 
     this.realm.write(() => {
@@ -55,6 +54,8 @@ class RealmContactService implements ContactService {
 
         index++;
       }
+
+      performanceService.trackEvent(PERFOMANCE_EVENTS.realmWrite);
 
       if (index < count) {
         setTimeout(() => {

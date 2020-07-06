@@ -2,8 +2,12 @@ import {InteractionManager} from 'react-native';
 import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
-import {getName} from '../utils/nameGenerator';
+import {
+  performanceService,
+  PERFOMANCE_EVENTS,
+} from '../services/performanceService';
 import {ContactService} from '../types/contactService';
+import {getName} from '../utils/nameGenerator';
 import {schema} from '../watermelonModels/watermelonSchema';
 import {WatermelonContact} from '../watermelonModels/watermelonContact.model';
 import {CONTACT_TABLE_NAME} from '../watermelonModels/watermelonContact.model';
@@ -47,10 +51,6 @@ class WatermelonContactService implements ContactService {
     cb: () => {},
   ): Promise<void> {
     let index = startIndex;
-    // console.log(
-    //   'Write sample contacts. Current count: ',
-    //   await this.contactsCollection.query().fetchCount(),
-    // );
 
     const batchActions = [];
 
@@ -67,6 +67,8 @@ class WatermelonContactService implements ContactService {
       }
 
       await this.database.batch(...batchActions);
+
+      performanceService.trackEvent(PERFOMANCE_EVENTS.watermelonWrite);
 
       if (index < count) {
         setTimeout(() => {

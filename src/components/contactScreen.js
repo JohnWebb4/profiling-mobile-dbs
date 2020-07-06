@@ -4,12 +4,12 @@ import {InteractionManager, StyleSheet} from 'react-native';
 import {SearchBar} from './searchBar';
 
 function ContactScreen({contactService, ContactList}) {
-  const [contacts, updateContacts] = useState([]);
-  const [searchText, updateSearchText] = useState('');
+  const [contacts, setContacts] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     InteractionManager.runAfterInteractions(async () => {
-      updateContacts(await contactService.getContacts());
+      setContacts(await contactService.getContacts());
     });
   }, []);
 
@@ -18,9 +18,9 @@ function ContactScreen({contactService, ContactList}) {
   if (searchText) {
     if (contacts.filtered) {
       searchContacts = contacts.filtered('name CONTAINS[c] $0', searchText);
-    } else {
+    } else if (contacts.filter) {
       searchContacts = contacts.filter(({name}) =>
-        name.includes(searchContacts),
+        name.toLowerCase().includes(searchText.toLowerCase()),
       );
     }
   }
@@ -28,13 +28,13 @@ function ContactScreen({contactService, ContactList}) {
   return (
     <>
       <SearchBar
-        onChangeText={updateSearchText}
+        onChangeText={setSearchText}
         placeholder={'Search Contact name'}
         style={styles.container}>
         {searchText}
       </SearchBar>
 
-      <ContactList contacts={contacts} searchText={searchText} />
+      <ContactList contacts={searchContacts} searchText={searchText} />
     </>
   );
 }
