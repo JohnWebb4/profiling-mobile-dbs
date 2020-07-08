@@ -1,6 +1,4 @@
-// @flow
-// Top 200 baby names
-const sampleName = [
+const sampleNames = [
   'James',
   'Mary',
   'John',
@@ -203,22 +201,4 @@ const sampleName = [
   'Jane',
 ];
 
-function getName(key: number) {
-  // key is zero based, so log(0) is -inf
-  // Add one to start at one
-  let currentIndex = key;
-  let nameParts = [];
-
-  if (key === 0) {
-    return sampleName[0];
-  }
-
-  while (currentIndex >= 1) {
-    nameParts.push(sampleName[currentIndex % sampleName.length]);
-    currentIndex = Math.floor(currentIndex / sampleName.length);
-  }
-
-  return nameParts.join(' ');
-}
-
-export {getName};
+export {sampleNames};

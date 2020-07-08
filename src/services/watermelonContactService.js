@@ -7,7 +7,7 @@ import {
   PERFOMANCE_EVENTS,
 } from '../services/performanceService';
 import {ContactService} from '../types/contactService';
-import {getName} from '../utils/nameGenerator';
+import {generateContact} from '../utils/contactGenerator';
 import {schema} from '../watermelonModels/watermelonSchema';
 import {WatermelonContact} from '../watermelonModels/watermelonContact.model';
 import {CONTACT_TABLE_NAME} from '../watermelonModels/watermelonContact.model';
@@ -56,10 +56,13 @@ class WatermelonContactService implements ContactService {
 
     await this.database.action(async () => {
       for (let i = 0; i < batchSize && index < count; i++) {
+        const newContact = generateContact(index);
+
         batchActions.push(
           this.contactsCollection.prepareCreate((contact) => {
-            contact.key = String(index);
-            contact.name = getName(index);
+            Object.entries(newContact).forEach(([key, value]) => {
+              contact[key] = value;
+            });
           }),
         );
 

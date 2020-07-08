@@ -5,8 +5,8 @@ import {
   PERFOMANCE_EVENTS,
 } from '../services/performanceService';
 import {ContactService} from '../types/contactService';
-import {CONTACT_MODEL, RealmContact} from '../realmModels/RealmContact.model';
-import {getName} from '../utils/nameGenerator';
+import {CONTACT_MODEL, RealmContact} from '../realmModels/realmContact.model';
+import {generateContact} from '../utils/contactGenerator';
 import {InteractionManager} from 'react-native';
 
 class RealmContactService implements ContactService {
@@ -47,10 +47,7 @@ class RealmContactService implements ContactService {
 
     this.realm.write(() => {
       for (let i = 0; i < batchSize && index < count; i++) {
-        this.realm.create(CONTACT_MODEL, {
-          key: String(index),
-          name: getName(index),
-        });
+        this.realm.create(CONTACT_MODEL, generateContact(index));
 
         index++;
       }

@@ -5,10 +5,10 @@ import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {Contact} from '../types/contact';
 
 function ContactItem({item, separators}: {item: Contact}): React$Node {
-  const {key, name} = item;
+  const {key, firstName, lastName} = item;
 
   function onPress() {
-    Alert.alert(name);
+    Alert.alert(JSON.stringify(item));
   }
 
   return (
@@ -20,7 +20,7 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
       <View>
         <Text style={styles.header}>
           <Text style={styles.key}>{`${key}. `}</Text>
-          <Text>{name}</Text>
+          <Text>{`${firstName} ${lastName}`}</Text>
         </Text>
       </View>
     </TouchableHighlight>
