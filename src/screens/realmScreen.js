@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {MetricsContext} from '../contexts/metricsContext';
+import {ContactItem} from '../components/contactItem';
 import {ContactList} from '../components/contactList';
 import {ContactScreen} from '../components/contactScreen';
 import {MetricsBar} from '../components/metricsBar';
@@ -19,6 +20,7 @@ function RealmScreen() {
         <ContactScreen
           contactService={realmContactService}
           ContactList={ContactList}
+          ContactItem={ContactItem}
         />
       ) : null}
 

@@ -7,7 +7,7 @@ import {
 } from '../services/performanceService';
 import {Contact} from '../types/contact';
 import {ContactService} from '../types/contactService';
-import {getName} from '../utils/nameGenerator';
+import {generateContact} from '../utils/contactGenerator';
 
 let data: Contact[] = [];
 
@@ -32,10 +32,7 @@ class InMemoryContactService implements ContactService {
     let index = startIndex;
 
     for (let i = 0; i < batchSize && index < count; i++) {
-      data.push({
-        key: String(index),
-        name: getName(index),
-      });
+      data.push(generateContact(index));
 
       index++;
     }

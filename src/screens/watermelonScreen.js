@@ -7,6 +7,7 @@ import {ContactScreen} from '../components/contactScreen';
 import {EnhancedContactList} from '../components/contactList';
 import {MetricsBar} from '../components/metricsBar';
 import {watermelonContactService} from '../services/watermelonContactService';
+import {EnhancedContactItem} from '../components/contactItem';
 
 function WatermelonScreen() {
   const {watermelonStartTime, watermelonCompleteTime} = useContext(
@@ -21,6 +22,7 @@ function WatermelonScreen() {
         <ContactScreen
           contactService={watermelonContactService}
           ContactList={EnhancedContactList}
+          ContactItem={EnhancedContactItem}
         />
       ) : null}
 

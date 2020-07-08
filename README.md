@@ -10,6 +10,12 @@ The following graph describes the speed each database can write a batch (1,000) 
 
 For a trivial data structure, Realm is faster than Watermelon DB.
 
+The original result was for a trivial database table (just a name and key). Most data models have connections between tables. A contact for examples has phone numbers, emails, social profiles, etc. A better representation of the database can be seen by implementing a more complex data model for 10,000 contacts.
+
+![10-000-complex-contacts](/assets/10-000-complex.png)
+
+Watermelon is better in this situation as well. Notice the upward trend of the SQLite database. Since all tables are in a file, as more elements are added, the file size grows and appending new entries takes longer and longer.
+
 ## Getting started
 
 Clone repo

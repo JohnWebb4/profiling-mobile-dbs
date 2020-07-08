@@ -3,14 +3,16 @@ import {FlatList, StyleSheet, Text, Dimensions, View} from 'react-native';
 import {Q} from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 
-import {ContactItem} from '../components/contactItem';
 import {Contact} from '../types/contact';
 import {formatNumber} from '../utils/format';
 
 // Lazy
 const FLAT_HEIGHT = Dimensions.get('screen').height * 0.75;
 
-function ContactList({contacts}) {
+function ContactList({contacts, ContactItem}) {
+  function renderContactItem(props) {
+    return <ContactItem {...props} />;
+  }
   return (
     <>
       {contacts.length ? (
@@ -26,7 +28,7 @@ function ContactList({contacts}) {
           style={styles.paddingHorizon}
           data={contacts}
           keyExtractor={getContactKey}
-          renderItem={ContactItem}
+          renderItem={renderContactItem}
         />
       </View>
     </>

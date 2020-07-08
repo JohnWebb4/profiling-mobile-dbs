@@ -27,7 +27,7 @@ import {
 
 const BATCH_SIZE = 1000; // contacts per batch
 const BATCH_INTERVAL = 100; // ms
-const SAMPLE_CONTACT_COUNT = 20000; // total number of sample contacts
+const SAMPLE_CONTACT_COUNT = 10000; // total number of sample contacts
 
 const labels = [];
 
@@ -36,6 +36,8 @@ for (let i = 0; i < SAMPLE_CONTACT_COUNT; i += BATCH_SIZE) {
 }
 
 const Tab = createBottomTabNavigator();
+
+let pingRef;
 
 function App(): React$Node {
   const [memoryStartTime, setMemoryStartTime] = useState();
@@ -54,6 +56,7 @@ function App(): React$Node {
   useEffect(() => {
     // Write contacts here
     InteractionManager.runAfterInteractions(() => {
+      pingRef = setInterval(() => console.log('ping', new Date()), 1000);
       writeSampleWatermelonContacts(
         setWatermelonStartTime,
         setWatermelonCompleteTime,
@@ -63,6 +66,7 @@ function App(): React$Node {
             setRealmCompleteTime,
             () => {
               // Comment out for high contact counts
+              clearInterval(pingRef);
               writeSampleMemoryContacts(
                 setMemoryStartTime,
                 setMemoryCompleteTime,
@@ -72,6 +76,12 @@ function App(): React$Node {
         },
       );
     });
+
+    return () => {
+      watermelonContactService.close();
+      realmContactService.close();
+      inMemoryContactService.close();
+    };
   }, []);
 
   return (

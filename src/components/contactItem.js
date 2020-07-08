@@ -3,12 +3,24 @@ import React from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
 import {Contact} from '../types/contact';
+import withObservables from '@nozbe/with-observables';
 
-function ContactItem({item, separators}: {item: Contact}): React$Node {
-  const {key, name} = item;
+function ContactItem(data: {item: Contact}): React$Node {
+  const {item, separators} = data;
+  const {key, firstName, lastName} = item;
+
+  const company = data.company || item.company;
+  const emails = data.emails || item.emails;
 
   function onPress() {
-    Alert.alert(name);
+    Alert.alert(
+      JSON.stringify({
+        company: company.name,
+        emails: emails.map(({email}) => email),
+        firstName,
+        lastName,
+      }),
+    );
   }
 
   return (
@@ -20,12 +32,24 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
       <View>
         <Text style={styles.header}>
           <Text style={styles.key}>{`${key}. `}</Text>
-          <Text>{name}</Text>
+          <Text>{`${firstName} ${lastName}`}</Text>
         </Text>
       </View>
     </TouchableHighlight>
   );
 }
+
+const enhance = withObservables(['item'], ({item}) => {
+  return {
+    item: item.observe(),
+    company: item.collections
+      .get('companies')
+      .findAndObserve(item._raw.company_id),
+    emails: item.emails.observe(),
+  };
+});
+
+const EnhancedContactItem = enhance(ContactItem);
 
 const styles = StyleSheet.create({
   key: {
@@ -36,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {ContactItem};
+export {ContactItem, EnhancedContactItem};
