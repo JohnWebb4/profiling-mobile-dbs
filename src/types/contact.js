@@ -4,7 +4,7 @@ export interface Contact {
   key: string;
   firstName: string;
   lastName: string;
-  company: [{name: string}];
+  company: {name: string};
   emails: [
     {
       email: string,
@@ -45,7 +45,11 @@ export interface Contact {
       year: string,
     },
   ];
-  relatedNames: [string];
+  relatedNames: [
+    {
+      name: String,
+    },
+  ];
   socialProfiles: [
     {
       username: string,

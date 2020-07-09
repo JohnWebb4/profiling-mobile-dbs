@@ -5,7 +5,21 @@ import {
   PERFOMANCE_EVENTS,
 } from '../services/performanceService';
 import {ContactService} from '../types/contactService';
-import {CONTACT_MODEL, RealmContact} from '../realmModels/realmContact.model';
+import {
+  RealmAddress,
+  RealmCompany,
+  CONTACT_MODEL,
+  RealmContact,
+  RealmDate,
+  RealmEmail,
+  RealmField,
+  RealmNote,
+  RealmPhonenumber,
+  RealmRelatedName,
+  RealmRingtone,
+  RealmSocialProfile,
+  RealmUrl,
+} from '../realmModels/realmContact.model';
 import {generateContact} from '../utils/contactGenerator';
 import {InteractionManager} from 'react-native';
 
@@ -14,7 +28,20 @@ class RealmContactService implements ContactService {
 
   constructor() {
     Realm.open({
-      schema: [RealmContact],
+      schema: [
+        RealmAddress,
+        RealmCompany,
+        RealmContact,
+        RealmDate,
+        RealmEmail,
+        RealmField,
+        RealmNote,
+        RealmPhonenumber,
+        RealmRelatedName,
+        RealmRingtone,
+        RealmSocialProfile,
+        RealmUrl,
+      ],
     }).then((realm) => {
       this.realm = realm;
 

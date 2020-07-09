@@ -3,23 +3,32 @@ const CONTACT_MODEL = 'Contact';
 const RealmContact = {
   name: CONTACT_MODEL,
   properties: {
-    key: 'string',
-    firstName: 'string',
-    lastName: 'string',
-    company: 'Company[]',
-    emails: 'Email[]',
-    phoneNumbers: 'Phonenumber[]',
-    ringTone: 'Ringtone',
-    textTone: 'Ringtone',
-    urls: 'Url[]',
     addresses: 'Address[]',
     birthdays: 'Date[]',
+    company: 'Company',
     dates: 'Date[]',
-    relatedNames: 'string[]',
-    socialProfiles: 'SocialProfile[]',
-    instantMessages: 'SocialProfile[]',
-    note: 'Note',
+    emails: 'Email[]',
     fields: 'Field[]',
+    firstName: 'string',
+    instantMessages: 'SocialProfile[]',
+    key: 'string',
+    lastName: 'string',
+    note: 'Note',
+    phoneNumbers: 'Phonenumber[]',
+    relatedNames: 'RelatedName[]',
+    ringTone: 'Ringtone',
+    socialProfiles: 'SocialProfile[]',
+    textTone: 'Ringtone',
+    urls: 'Url[]',
+  },
+};
+
+const ADDRESS_MODEL = 'Address';
+
+const RealmAddress = {
+  name: ADDRESS_MODEL,
+  properties: {
+    address: 'string',
   },
 };
 
@@ -79,6 +88,15 @@ const RealmPhonenumber = {
   },
 };
 
+const RELATEDNAME_MODEL = 'RelatedName';
+
+const RealmRelatedName = {
+  name: RELATEDNAME_MODEL,
+  properties: {
+    name: 'string',
+  },
+};
+
 const RINGTONE_MODEL = 'Ringtone';
 
 const RealmRingtone = {
@@ -107,15 +125,28 @@ const RealmUrl = {
 };
 
 export {
+  ADDRESS_MODEL,
+  RealmAddress,
+  COMPANY_MODEL,
+  RealmCompany,
   CONTACT_MODEL,
   RealmContact,
-  RealmCompany,
+  DATE_MODEL,
   RealmDate,
+  EMAIL_MODEL,
   RealmEmail,
+  FIELD_MODEL,
   RealmField,
+  NOTE_MODEL,
   RealmNote,
+  PHONENUMBER_MODEL,
   RealmPhonenumber,
+  RELATEDNAME_MODEL,
+  RealmRelatedName,
+  RINGTONE_MODEL,
   RealmRingtone,
+  SOCIAL_PROFILE_MODEL,
   RealmSocialProfile,
+  URL_MODEL,
   RealmUrl,
 };

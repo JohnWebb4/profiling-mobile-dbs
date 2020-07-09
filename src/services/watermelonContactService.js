@@ -9,8 +9,24 @@ import {
 import {ContactService} from '../types/contactService';
 import {generateContact} from '../utils/contactGenerator';
 import {schema} from '../watermelonModels/watermelonSchema';
-import {WatermelonContact} from '../watermelonModels/watermelonContact.model';
-import {CONTACT_TABLE_NAME} from '../watermelonModels/watermelonContact.model';
+import {
+  WatermelonAddress,
+  WatermelonBirthday,
+  CONTACT_TABLE_NAME,
+  WatermelonContact,
+  WatermelonCompany,
+  WatermelonDate,
+  WatermelonEmail,
+  WatermelonField,
+  WatermelonInstantMessages,
+  WatermelonNote,
+  WatermelonPhonenumber,
+  WatermelonRelatedname,
+  WatermelonRingtone,
+  WatermelonSocialProfile,
+  WatermelonTexttone,
+  WatermelonUrl,
+} from '../watermelonModels/watermelonContact.model';
 
 class WatermelonContactService implements ContactService {
   database: Database;
@@ -23,7 +39,23 @@ class WatermelonContactService implements ContactService {
 
     this.database = new Database({
       adapter,
-      modelClasses: [WatermelonContact],
+      modelClasses: [
+        WatermelonAddress,
+        WatermelonBirthday,
+        WatermelonContact,
+        WatermelonCompany,
+        WatermelonDate,
+        WatermelonEmail,
+        WatermelonField,
+        WatermelonInstantMessages,
+        WatermelonNote,
+        WatermelonPhonenumber,
+        WatermelonRelatedname,
+        WatermelonRingtone,
+        WatermelonSocialProfile,
+        WatermelonTexttone,
+        WatermelonUrl,
+      ],
       actionsEnabled: true,
     });
 
@@ -58,13 +90,9 @@ class WatermelonContactService implements ContactService {
       for (let i = 0; i < batchSize && index < count; i++) {
         const newContact = generateContact(index);
 
-        batchActions.push(
-          this.contactsCollection.prepareCreate((contact) => {
-            Object.entries(newContact).forEach(([key, value]) => {
-              contact[key] = value;
-            });
-          }),
-        );
+        this.writeContact(newContact).forEach((action) => {
+          batchActions.push(action);
+        });
 
         index++;
       }
@@ -89,6 +117,36 @@ class WatermelonContactService implements ContactService {
         cb();
       }
     }, 'Create Sample Contacts');
+  }
+
+  writeContact(newContact) {
+    const batchWrites = [];
+
+    batchWrites.push(
+      this.contactsCollection.prepareCreate((contact) => {
+        // Create children/relations
+        contact.addAddresses(newContact.addresses);
+        contact.addBirthdays(newContact.birthdays);
+        contact.addCompany(newContact.company);
+        contact.addDates(newContact.dates);
+        contact.addEmails(newContact.emails);
+        contact.addFields(newContact.fields);
+        contact.addInstantMessages(newContact.instantMessages);
+        contact.addNote(newContact.note);
+        contact.addPhoneNumbers(newContact.phoneNumbers);
+        contact.addRelatedNames(newContact.relatedNames);
+        contact.addRingtone(newContact.ringTone);
+        contact.addSocialProfiles(newContact.socialProfiles);
+        contact.addTexttone(newContact.textTone);
+        contact.addUrls(newContact.urls);
+
+        contact.key = newContact.key;
+        contact.firstName = newContact.firstName;
+        contact.lastName = newContact.lastName;
+      }),
+    );
+
+    return batchWrites;
   }
 }
 

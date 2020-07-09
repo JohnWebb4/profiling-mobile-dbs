@@ -3,12 +3,22 @@ import React from 'react';
 import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
 import {Contact} from '../types/contact';
+import withObservables from '@nozbe/with-observables';
 
-function ContactItem({item, separators}: {item: Contact}): React$Node {
+function ContactItem(data: {item: Contact}): React$Node {
+  const {item, separators} = data;
   const {key, firstName, lastName} = item;
 
+  const company = data.company || item.company;
+
   function onPress() {
-    Alert.alert(JSON.stringify(item));
+    Alert.alert(
+      JSON.stringify({
+        company,
+        firstName,
+        lastName,
+      }),
+    );
   }
 
   return (
@@ -27,6 +37,14 @@ function ContactItem({item, separators}: {item: Contact}): React$Node {
   );
 }
 
+const enhance = withObservables([], ({item}) => {
+  return {
+    company: item.company && item.company.observe(),
+  };
+});
+
+const EnhancedContactItem = enhance(ContactItem);
+
 const styles = StyleSheet.create({
   key: {
     color: 'blue',
@@ -36,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {ContactItem};
+export {ContactItem, EnhancedContactItem};

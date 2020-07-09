@@ -3,7 +3,7 @@ import {InteractionManager, StyleSheet} from 'react-native';
 
 import {SearchBar} from './searchBar';
 
-function ContactScreen({contactService, ContactList}) {
+function ContactScreen({contactService, ContactItem, ContactList}) {
   const [contacts, setContacts] = useState([]);
   const [searchText, setSearchText] = useState('');
 
@@ -34,7 +34,11 @@ function ContactScreen({contactService, ContactList}) {
         {searchText}
       </SearchBar>
 
-      <ContactList contacts={searchContacts} searchText={searchText} />
+      <ContactList
+        contacts={searchContacts}
+        searchText={searchText}
+        ContactItem={ContactItem}
+      />
     </>
   );
 }

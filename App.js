@@ -27,7 +27,7 @@ import {
 
 const BATCH_SIZE = 1000; // contacts per batch
 const BATCH_INTERVAL = 100; // ms
-const SAMPLE_CONTACT_COUNT = 20000; // total number of sample contacts
+const SAMPLE_CONTACT_COUNT = 1; // total number of sample contacts
 
 const labels = [];
 

@@ -46,22 +46,25 @@ let getDates = getRandomElementsGenerator(sampleDates);
 let getEmails = getRandomElementsGenerator(sampleEmails);
 let getFields = getRandomElementsGenerator(sampleFields);
 let getPhoneNumbers = getRandomElementsGenerator(samplePhoneNumbers);
-let getRelatedNames = getRandomElementsGenerator(sampleNames);
+let getRelatedNames = getRandomElementsGenerator(
+  sampleNames.map((name) => ({
+    name,
+  })),
+);
 let getSocialProfiles = getRandomElementsGenerator(sampleSocialProfiles);
 let getInstantMessages = getRandomElementsGenerator(sampleSocialProfiles);
 let getUrls = getRandomElementsGenerator(sampleUrls);
 
 function getRandomElementGenerator(samples) {
-  return getRandomElementsGenerator(samples, 1);
+  return function () {
+    return getRandomElementsGenerator(samples, 1, 1)()[0];
+  };
 }
 
-function getRandomElementsGenerator(samples, maxCount) {
+function getRandomElementsGenerator(samples, maxCount, minCount = 0) {
   return function generator() {
     const elements = [];
-    let count = maxCount;
-    if (!count) {
-      count = getRandomIndex(samples.length);
-    }
+    const count = getRandomIndex(maxCount || samples.length, minCount);
 
     for (let i = 0; i < count; i++) {
       const randomIndex = getRandomIndex(samples.length);
@@ -72,8 +75,10 @@ function getRandomElementsGenerator(samples, maxCount) {
   };
 }
 
-function getRandomIndex(length) {
-  return Math.floor(Math.random() * length);
+function getRandomIndex(max, min = 0) {
+  const dist = max - min;
+
+  return Math.floor(Math.random() * dist + min);
 }
 
 export {generateContact};
